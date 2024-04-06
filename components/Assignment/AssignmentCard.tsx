@@ -11,7 +11,7 @@ import { colorPicker } from "utils/colorPicker";
 
 const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, status }) => {
   return (
-    <div className="border w-[30%] p-[0.5rem] bg-foreground rounded-xl">
+    <div className="shadow-lg w-[30%] p-[0.5rem] bg-foreground rounded-xl">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-h1 font-bold">{assignmentData?.title}</h1>
         <div className="flex flex-row items-center gap-[0.4rem]">
@@ -57,8 +57,8 @@ const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, s
             <p>CANDIDATE</p>
             <p>SCORE</p>
           </div>
-          {submissionsData.map((submission) => (
-            <div className="flex flex-row p-[0.2rem] items-center justify-between">
+          {submissionsData && submissionsData.map((submission,index) => (
+            <div key={index} className="flex flex-row p-[0.2rem] items-center justify-between">
               <div className="flex flex-row gap-[0.5rem]">
               <Image className="rounded-xl" src={ProfilePic} alt="" width={50} height={50}/>
               <div>
@@ -66,7 +66,7 @@ const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, s
                 <p className="text-p text-secondary-text">{submission?.email}</p>
               </div>
               </div>
-              <p className={`text-${colorPicker(submission?.score)} text-h2 font-bold`}>{submission?.score}</p>
+              <p className={`text-${colorPicker(submission?.score)} text-h2 font-bold`}>{submission?.score}%</p>
             </div>
           ))}
         </div>
