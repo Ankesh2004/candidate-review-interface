@@ -9,21 +9,49 @@ const Dashboard = () => {
     const [assignmentData, setAssignmentData] = useState<any[]>([])
     const [submissionData, setSubmissionData] = useState<any[]>([])
     const [status, setStatus] = useState<string>('review');
+    const [currentUserData, setCurrentUserData] = useState<any>({});
+    const fetchAssignmentData = async() => {
+        try{
+            const response = await getAssignmentData();
+            setAssignmentData(response?.data || []);
+        }
+        catch(error){
+            console.log('Error while fetching assignment data', error);
+        }
+    }
+    const fetchSubmissionData = async(status:string) => {
+        try{
+            const response = await getSubmissionData(status);
+            setSubmissionData(response?.data || []);
+        }
+        catch(error){
+            console.log('Error while fetching submission data', error);
+        }
+    }
+    const fetchUserScoreData = async(assignmentId:string,user_id:string) => {
+        try{
+            const response = await getUserScoreData(assignmentId,user_id);
+            setCurrentUserData(response?.data || {});
+        }
+        catch(error){
+            console.log('Error while fetching user score data', error);
+        }
+    }
+    const handleStatusChange = () => {
+        if(status === 'review'){
+            setStatus('shortlisted')
+        }
+        else{
+            setStatus('review')
+        }
+        fetchSubmissionData(status);
+    };
+    
 
     useEffect(() => {
         const fetchData = async () => {
-            try{
-            const assignmentResponse = await getAssignmentData();
-            console.log('Assignment Data', assignmentData);
-            setAssignmentData(assignmentResponse?.data || []);
-
-            const submissionResponse = await getSubmissionData(status);
-            console.log('Submission Response', submissionResponse);
-            setSubmissionData(submissionResponse?.data || []);
-            }
-            catch(error){
-                console.log('Error while fetching assignment or submission data', error);
-            }
+            fetchAssignmentData();
+            fetchSubmissionData(status);
         }; 
         fetchData();
     }, []);
@@ -34,7 +62,7 @@ const Dashboard = () => {
             {/* Main Board Section  */}
             <div className='p-[1rem] w-[100%]'>
                 <Navbar data={assignmentData}/>
-                <AssignmentCard assignmentData={assignmentData} submissionsData={submissionData}/>
+                <AssignmentCard assignmentData={assignmentData} submissionsData={submissionData} handleStatusChange={handleStatusChange} status={status}/>
             </div>
         </div>
     );

@@ -20,7 +20,7 @@ export const getSubmissionData = async(status:string) => {
         const response = apiConnector('GET', '/assignment_candidates',{},{},{
             status: status,
             offset:0,
-            limit: 10
+            limit: 4
         });
         return response;
     }
