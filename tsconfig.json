@@ -4,7 +4,7 @@
     "paths": {
       "@/components/*": [
         "components/*"
-      ]
+      ],
     },
     "lib": [
       "dom",
@@ -36,7 +36,7 @@
     "**/*.tsx",
     "postcss.config.js",
     "tailwind.config.js"
-  ],
+, "next.config.js", "components/common/Spinner.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const CreateAssignmentCard = () => {
   return (
-    <div className='flex flex-col gap-[0.5rem] bg-button text-white w-[12rem] p-[1rem] rounded-2xl'>
+    <div className='flex flex-col shadow-sm gap-[0.5rem] bg-button text-white w-[12rem] p-[1rem] rounded-2xl'>
         <div className='bg-foreground border flex items-center justify-center w-[1.75rem] rounded-lg text-secondary-text'>
             <AddIcon/>
         </div>

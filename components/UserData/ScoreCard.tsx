@@ -6,6 +6,7 @@ const ScoreCard = ({topic,score}) => {
     <div className='flex flex-row justify-between w-[100%] gap-[1rem]'>
         <p className='w-[70%] font-bold text-secondary-text'>{topic}</p>
         <ProgressBar score={score}/>
+        {/* <ProgressBar score="1"/> */}
     </div>
   )
 }

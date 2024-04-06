@@ -6,7 +6,7 @@ const ProgressBar = ({ score }) => {
 
   return (
     <div className={`flex flex-row items-center justify-between w-[100%] font-bold gap-[0.1rem] text-${colorPicker(normalizedScore)}`}>
-      <div className='w-[80%]  bg-hover-layer rounded-2xl'>
+      <div className='w-[100%] bg-hover-layer rounded-2xl'>
         <div className={`h-[1px] p-[0.3rem] rounded-2xl bg-green-400 w-[${normalizedScore}%]`}></div>
       </div>
       

@@ -4,12 +4,20 @@ import Link from "next/link";
 import { formatDate } from "utils/formatDate";
 import { secondsToHours } from "utils/secondsToHour";
 import InventoryIcon from "@mui/icons-material/Inventory";
-import DescriptionIcon from '@mui/icons-material/Description';
+import DescriptionIcon from "@mui/icons-material/Description";
 import Image from "next/image";
 import ProfilePic from "public/profile-pic.jpg";
 import { colorPicker } from "utils/colorPicker";
+import { Box } from "@mui/material";
 
-const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, status }) => {
+const AssignmentCard = ({
+  assignmentData,
+  submissionsData,
+  handleStatusChange,
+  status,
+  handleUserChange,
+  user_id,
+}) => {
   return (
     <div className="shadow-lg w-[30%] p-[0.5rem] bg-foreground rounded-xl">
       <div className="flex flex-row justify-between items-center">
@@ -40,13 +48,25 @@ const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, s
       <div>
         {/* Buttons  */}
         <div className="flex flex-row gap-[1rem] p-[0.5rem] text-p font-bold">
-          <button className={`bg-foreground flex flex-row items-center gap-[0.4rem] shadow-sm ${status==="review"?'shadow-lg':''} p-[0.5rem] rounded-2xl`}
-          onClick={handleStatusChange}>
+          <button
+            className={`bg-foreground flex flex-row items-center gap-[0.4rem] shadow-sm ${
+              status === "review" ? "shadow-xl" : "shadow-lg"
+            } p-[0.5rem] rounded-2xl`}
+            onClick={() => {
+              handleStatusChange("review");
+            }}
+          >
             <InventoryIcon />
             <p>TO REVIEW</p>
           </button>
-          <button className={`bg-foreground flex flex-row items-center gap-[0.4rem] shadow-sm ${status==="shortlisted"?'shadow-lg':''} p-[0.5rem] rounded-2xl`}
-          onClick={handleStatusChange}>
+          <button
+            className={`bg-foreground flex flex-row items-center gap-[0.4rem] shadow-sm ${
+              status === "shortlisted" ? "shadow-xl" : "shadow-lg"
+            } p-[0.5rem] rounded-2xl`}
+            onClick={() => {
+              handleStatusChange("shortlisted");
+            }}
+          >
             <DescriptionIcon />
             <p>SHORTLISTED</p>
           </button>
@@ -57,18 +77,42 @@ const AssignmentCard = ({ assignmentData, submissionsData, handleStatusChange, s
             <p>CANDIDATE</p>
             <p>SCORE</p>
           </div>
-          {submissionsData && submissionsData.map((submission,index) => (
-            <div key={index} className="flex flex-row p-[0.2rem] items-center justify-between">
-              <div className="flex flex-row gap-[0.5rem]">
-              <Image className="rounded-xl" src={ProfilePic} alt="" width={50} height={50}/>
-              <div>
-                <h2 className="text-h2 font-bold">{submission?.full_name}</h2>
-                <p className="text-p text-secondary-text">{submission?.email}</p>
-              </div>
-              </div>
-              <p className={`text-${colorPicker(submission?.score)} text-h2 font-bold`}>{submission?.score}%</p>
-            </div>
-          ))}
+          <Box sx={{ height: "16rem", overflowY: "auto" }}>
+            {submissionsData &&
+              submissionsData.map((submission, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-row p-[0.2rem] items-center justify-between rounded-xl cursor-pointer
+    ${submission.id == user_id ? "bg-hover-layer" : ""}`}
+                  onClick={() => handleUserChange(submission.id)}
+                >
+                  <div className="flex flex-row gap-[0.5rem]">
+                    <Image
+                      className="rounded-xl"
+                      src={ProfilePic}
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                    <div>
+                      <h2 className="text-h2 font-bold">
+                        {submission?.full_name}
+                      </h2>
+                      <p className="text-p text-secondary-text">
+                        {submission?.email}
+                      </p>
+                    </div>
+                  </div>
+                  <p
+                    className={`text-${colorPicker(
+                      submission?.score
+                    )} text-h2 font-bold`}
+                  >
+                    {submission?.score}%
+                  </p>
+                </div>
+              ))}
+          </Box>
         </div>
       </div>
     </div>
