@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background-rgb: 248,249,250;
+    --foreground-rgb: 255, 255, 255;
+    --primary-text-rgb: 45, 55, 72;
+    --secondary-text-rgb: 113, 128, 150;
+    --hover-layer-rgb: 205, 205, 205;
+    --button-rgb:79,209,197;
+    --progress-green:46,189,89;
+    --progress-red:224,0,0;
+    --progress-yellow:236,178,46;
+    --h1-size: 2rem; /* 32px */
+    --h2-size: 1.5rem; /* 24px */
+    --p-size: 1rem; /* 16px */
+  }
+  *{
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+  }
