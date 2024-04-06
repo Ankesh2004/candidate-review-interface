@@ -8,7 +8,7 @@ This project is aimed at reviewing candidates and is intended for HRs.
 To install the project, follow these steps:
 1.
 ```bash
-git clone <[repository-url](https://github.com/Ankesh2004/candidate-review-interface)>
+git clone https://github.com/Ankesh2004/candidate-review-interface.git
 ```
 2.
 ```bash
