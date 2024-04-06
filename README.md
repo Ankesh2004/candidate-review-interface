@@ -12,7 +12,7 @@ git clone https://github.com/Ankesh2004/candidate-review-interface.git
 ```
 2.
 ```bash
-cd <candidate-review-interface>
+cd candidate-review-interface
 ```
 3.
 ```bash
